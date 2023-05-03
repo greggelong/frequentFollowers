@@ -10,6 +10,7 @@ let sl =0
 let sz =20
 let foo = new p5.Speech();
 let sent = "";
+let ifollowers = ['am','was','did','think','play','though','played','cry','say','said']
 
 
 function setup() {
@@ -39,12 +40,30 @@ function writePoem() {
   print("bing")
   sl++
 
-  getWordList(poemStart.value())
+  // 'i' does not have a frequent follower word list so I made my own
+
+  if(poemStart.value()== 'i' || poemStart.value== 'I'){
+    // if it is i then pick a follower
+    let f = random(ifollowers)
+    // print it to screeen and add it to string
+    text(f,400, sl*sz+sz)
+    //build the sentence to speak
+    sent += (f)+" ";
   
+    // increase sentence length
+    sl++
+    // then do the process on than one
+    getWordList(f)
+    
+
+  } else{
+  getWordList(poemStart.value())
+  }
 }
 
 function getWordList(prompt) {
   // getting next word frequent followeres
+  // this promise structure ensures that showword function will not run before data is retrieved from api
   loadJSON(`https://api.datamuse.com/words?lc=${prompt}&sp=*`, showword);
 }
 
