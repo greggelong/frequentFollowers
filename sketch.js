@@ -42,7 +42,7 @@ function writePoem() {
 
   // 'i' does not have a frequent follower word list so I made my own
 
-  if(poemStart.value()== 'i' || poemStart.value== 'I'){
+  if(poemStart.value()=== 'i' || poemStart.value()=== 'I'){
     // if it is i then pick a follower
     let f = random(ifollowers)
     // print it to screeen and add it to string
